@@ -598,7 +598,7 @@ int main(int argc, char *argv[])
     // close filelist destinations if necessary
     for (i = 0; i < numTpls; i++)
     {
-      if (tpls[i].dstFileName)
+      if (tpls[i].dstFile)
       {
 	fclose(tpls[i].dstFile);
 	tpls[i].dstFile = NULL;

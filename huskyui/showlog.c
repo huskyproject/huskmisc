@@ -20,9 +20,9 @@ int logWinLen;
 
 void logInit(int active)
 {
-  logWinLen = ((LINES - 1) / 3) - 2;
-  logWinBoxed = newwin((LINES - 1) / 3, COLS - 1, 0, 0);
-  logWin = newwin(logWinLen, COLS - 5, 1, 2);
+  logWinLen = (LINES / 3) - 2;
+  logWinBoxed = newwin(LINES / 3, COLS, 0, 0);
+  logWin = newwin(logWinLen, COLS - 4, 1, 2);
 
   leaveok(logWin, TRUE);
   scrollok(logWin, TRUE);

@@ -7,8 +7,8 @@ int outbIsActive;
 
 void outbInit(int active)
 {
-  outbWinBoxed = newwin((LINES - 1) / 3, COLS - 1, (LINES - 1) / 3, 0);
-  outbWin = newwin(((LINES - 1) / 3) - 2, COLS - 5, ((LINES - 1) / 3) + 1, 2);
+  outbWinBoxed = newwin(LINES / 3, COLS, LINES / 3, 0);
+  outbWin = newwin((LINES / 3) - 2, COLS - 4, (LINES / 3) + 1, 2);
 
   leaveok(outbWin, TRUE);
   scrollok(outbWin, TRUE);

@@ -14,9 +14,9 @@ int menuIsActive;
 
 void menuInit(int active)
 {
-  menuWinBoxed = newwin((LINES - 1) / 3, COLS - 1, ((LINES - 1) / 3) * 2, 0);
-  menuWin = newwin(((LINES - 1) / 3) - 2, COLS - 5,
-		   (((LINES - 1) / 3) * 2) + 1, 2);
+  menuWinBoxed = newwin(LINES / 3, COLS, (LINES / 3) * 2, 0);
+  menuWin = newwin((LINES / 3) - 2, COLS - 4,
+		   ((LINES / 3) * 2) + 1, 2);
   inputWin = menuWin;
   nodelay(inputWin, TRUE);
   keypad(inputWin, TRUE);

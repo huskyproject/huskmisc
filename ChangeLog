@@ -1,10 +1,107 @@
------ cvs ci ------
-Mon Aug  7 20:43:09 UTC 2000
-sms:
-* Imported huskyui, nmcopy and tools from huskybse 
+2002-11-13 Wednesday 08:53  stas_degteff
 
------ cvs ci ------
-Mon Aug  7 21:57:58 UTC 2000
-sms:
-* Added Makefile
+	* .cvs2cl (1.1), VERSION (1.1): Add HUSKY-standard version
+	information and ChangeLog generation
+
+2002-11-13 Wednesday 08:52  stas_degteff
+
+	* tools/: general.c (1.2), general.h (1.2), poll.c (1.4), send.c
+	(1.2), tolower.c (1.2): Use fidoconfig functions, remove unused
+	code
+
+2002-11-13 Wednesday 08:51  stas_degteff
+
+	* tools/: makefile.cyg (1.2), makefile.djg (1.2), makefile.unx
+	(1.2): Small fix makefiles
+
+2002-11-13 Wednesday 06:54  stas_degteff
+
+	* tools/: Makefile (1.5), makefile.cyg (1.1), makefile.djg (1.1),
+	makefile.unx (1.1), poll.c (1.3): Create legacy makefiles: unix
+	(generic), cygwin, DJGPP.
+
+2001-01-15 Monday 20:41  sms
+
+	* tools/poll.c (1.2): + poll: Added support for deleting
+	dial-counters (Binkley-, ifcico- and  BinkD-style)
+
+2000-12-21 Thursday 12:31  sms
+
+	* TODO (1.1): added TODO
+
+2000-12-12 Tuesday 14:18  sms
+
+	* hflist/TODO (1.2): updated TODO
+
+2000-12-12 Tuesday 14:11  sms
+
+	* hflist/TODO (1.1): added TODO
+
+2000-12-08 Friday 03:26  sms
+
+	* hflist/hflist.c (1.4): ! also trying all-lowercase and
+	all-uppercase variants of filenames when reading files.bbs
+
+2000-12-08 Friday 02:02  sms
+
+	* hflist/: README (1.2), hflist.c (1.2), template.c (1.2): * fixed
+	name of areaname variable + filelist type dirList ! file read
+	errors are displayed
+
+2000-12-07 Thursday 23:54  sms
+
+	* tools/Makefile (1.4): removed RMOPT from install :)
+
+2000-12-07 Thursday 23:48  sms
+
+	* Makefile (1.3): added hflist to Makefile
+
+2000-12-07 Thursday 23:32  sms
+
+	* hflist/: Makefile (1.1), README (1.1), hflist.c (1.1), snprintf.c
+	(1.1), snprintf.h (1.1), template.c (1.1), template.h (1.1):
+	initial version
+
+2000-12-03 Sunday 17:59  sms
+
+	* huskyui/Makefile (1.4), nmcopy/Makefile (1.3), tools/Makefile
+	(1.3): using RMOPT from huskymak.cfg
+
+2000-09-11 Monday 16:46  sms
+
+	* huskyui/huskyui.c (1.2): Removed sock.h from huskyui.c
+
+2000-08-30 Wednesday 19:26  sms
+
+	* huskyui/: Makefile (1.3), menu.c (1.3), showlog.c (1.3), sock.c
+	(1.2), sock.h (1.2): removed sock.c, sock.h from Makefile and
+	deleted them
+
+2000-08-30 Wednesday 18:18  sms
+
+	* huskyui/: menu.c (1.2), showlog.c (1.2), showoutb.c (1.2): fixed
+	size of windows (did not fully use the available space)
+
+2000-08-21 Monday 13:15  sms
+
+	* Makefile (1.2), huskyui/Makefile (1.2), nmcopy/Makefile (1.2),
+	tools/Makefile (1.2): added target uninstall
+
+2000-08-07 Monday 21:58  sms
+
+	* Makefile (1.1): Added Makefile
+
+2000-08-07 Monday 20:45  sms
+
+	* huskyui/.cvsignore (1.1), huskyui/Makefile (1.1), huskyui/cfg.c
+	(1.1), huskyui/cfg.h (1.1), huskyui/huskyui.c (1.1),
+	huskyui/huskyui.h (1.1), huskyui/menu.c (1.1), huskyui/menu.h
+	(1.1), huskyui/screen.c (1.1), huskyui/screen.h (1.1),
+	huskyui/showlog.c (1.1), huskyui/showlog.h (1.1),
+	huskyui/showoutb.c (1.1), huskyui/showoutb.h (1.1), huskyui/sock.c
+	(1.1), huskyui/sock.h (1.1), nmcopy/Makefile (1.1), nmcopy/TODO
+	(1.1), nmcopy/nmcopy.c (1.1), tools/.cvsignore (1.1),
+	tools/Makefile (1.1), tools/general.c (1.1), tools/general.h (1.1),
+	tools/poll.c (1.1), tools/request.c (1.1), tools/send.c (1.1),
+	tools/tolower.c (1.1): Initial revision
 

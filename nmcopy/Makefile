@@ -35,3 +35,6 @@ distclean: clean
 install:
 	$(INSTALL) $(IBOPT) nmcopy$(EXE) $(BINDIR)
 
+uninstall:
+	-$(RM) $(BINDIR)$(DIRSEP)nmcopy$(EXE)
+

@@ -50,3 +50,9 @@ install:
 	$(INSTALL) $(IBOPT) send$(EXE) $(BINDIR)
 	$(INSTALL) $(IBOPT) tolower$(EXE) $(BINDIR)
 
+uninstall:
+	-$(RM) $(BINDIR)$(DIRSEP)poll$(EXE) 
+	-$(RM) $(BINDIR)$(DIRSEP)request$(EXE)
+	-$(RM) $(BINDIR)$(DIRSEP)send$(EXE)
+	-$(RM) $(BINDIR)$(DIRSEP)tolower$(EXE)
+

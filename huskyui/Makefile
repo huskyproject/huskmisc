@@ -34,6 +34,9 @@ clean:
 distclean: clean
 	-$(RM) huskyui$(EXE)
 
-install:
+install: huskyui$(EXE)
 	$(INSTALL) $(IBOPT) huskyui$(EXE) $(BINDIR)
+
+uninstall:
+	$(RM) $(BINDIR)$(DIRSEP)huskyui$(EXE)
 

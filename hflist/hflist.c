@@ -2,6 +2,7 @@
 
 #include <errno.h>
 #include <fidoconf/fidoconf.h>
+#include <fidoconf/common.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,7 +15,6 @@
 
 #define max(a,b) ((a > b) ? (a) : (b))
 #define min(a,b) ((a < b) ? (a) : (b))
-#define nfree(a) { if (a) { free(a); a = NULL; } }
 
 typedef struct dirStats
 {
@@ -204,6 +204,28 @@ void readFilesBBS(char *dir, s_fileInfo ***files, s_dirStats *stats)
 	  curFile->size = st.st_size;
           stats->numBytes += st.st_size;
 	  curFile->timeModified = st.st_mtime;
+	}
+	else
+	{
+          strLower(strrchr(fname, '/'));
+	  if (!stat(fname, &st))
+	  {
+            strLower(curFile->name);
+	    curFile->size = st.st_size;
+	    stats->numBytes += st.st_size;
+	    curFile->timeModified = st.st_mtime;
+	  }
+	  else
+	  {
+	    strUpper(strrchr(fname, '/'));
+	    if (!stat(fname, &st))
+	    {
+	      strUpper(curFile->name);
+	      curFile->size = st.st_size;
+	      stats->numBytes += st.st_size;
+	      curFile->timeModified = st.st_mtime;
+	    }
+	  }
 	}
         nfree(fname);
         break;

@@ -3,3 +3,8 @@ Mon Aug  7 20:43:09 UTC 2000
 sms:
 * Imported huskyui, nmcopy and tools from huskybse 
 
+----- cvs ci ------
+Mon Aug  7 21:57:58 UTC 2000
+sms:
+* Added Makefile
+

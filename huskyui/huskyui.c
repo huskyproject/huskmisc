@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include <string.h>
 #include "screen.h"
-#include "sock.h"
 #include "showlog.h"
 #include "showoutb.h"
 #include "menu.h"

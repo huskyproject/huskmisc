@@ -4,7 +4,7 @@
 
 typedef struct _tCfg
 {
-  s_addr bossAddr;
+  hs_addr bossAddr;
   char *mailEditor;
   char *pollCmd;
   char *logName;

@@ -27,7 +27,7 @@ char **homeDirs = NULL;
 unsigned int numUsers = 0;
 s_fidoconfig *config = NULL;
 
-void cvtAddr(const NETADDR aka1, s_addr *aka2)
+void cvtAddr(const NETADDR aka1, hs_addr *aka2)
 {
   aka2->zone = aka1.zone;
   aka2->net  = aka1.net;
@@ -120,7 +120,7 @@ int scanMsg(HAREA area, unsigned int msgNum)
   long int addrMatch, nameMatch;
   unsigned int i;
   char *toLow;
-  s_addr dest;
+  hs_addr dest;
   char *text, *ctrlText;
   unsigned long int textLen, ctrlLen;
   HAREA userArea;

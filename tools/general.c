@@ -11,7 +11,7 @@
    params: outbound     path of outbound
            Addr         address to generate FLO name for
    result: filename of FLO (memory is allocated automatically) */
-char *FLOName(s_fidoconfig *config, s_addr Addr)
+char *FLOName(s_fidoconfig *config, hs_addr Addr)
 {
   char *FName;
   char *FName2;
@@ -101,9 +101,9 @@ char *FLOName(s_fidoconfig *config, s_addr Addr)
 /* Str2Addr - parse address-string into binary address
    params: s            string to parse
    result: binary address */
-s_addr Str2Addr(char *s)
+hs_addr Str2Addr(char *s)
 {
-  s_addr a;
+  hs_addr a;
   string2addr(s, &a);
   return a;
 }

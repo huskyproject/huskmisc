@@ -1,11 +1,14 @@
 /* poll.c - create a flowfile for a node/point to call him */
 
 #include <errno.h>
-#include <fidoconf/fidoconf.h>
-#include <smapi/progprot.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#include <smapi/progprot.h>
+#include <smapi/compiler.h>
+#include <fidoconf/fidoconf.h>
+
 #include "general.h"
 
 int main(int argc, char *argv[])

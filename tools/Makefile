@@ -1,3 +1,8 @@
+# $Id$
+#
+# Generic makefile for build miscellaneous tools using GNU C
+# Require huskymak.cfg
+
 include ../../huskymak.cfg
 
 all: poll$(EXE) request$(EXE) send$(EXE) tolower$(EXE)
@@ -35,7 +40,8 @@ tolower$(EXE): tolower$(OBJ)
 	$(CC) $(LFLAGS) -o tolower$(EXE) tolower$(OBJ) $(LIBS)
 
 clean:
-	-$(RM) $(RMOPT) *~
+	-$(RM) $(RMOPT) *.bak
+	-$(RM) $(RMOPT) *.b
 	-$(RM) $(RMOPT) *$(OBJ)
 
 distclean: clean
@@ -43,6 +49,8 @@ distclean: clean
 	-$(RM) $(RMOPT) request$(EXE)
 	-$(RM) $(RMOPT) send$(EXE)
 	-$(RM) $(RMOPT) tolower$(EXE)
+
+ifdef INSTALL
 
 install:
 	$(INSTALL) $(IBOPT) poll$(EXE) $(BINDIR)
@@ -56,3 +64,4 @@ uninstall:
 	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)send$(EXE)
 	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)tolower$(EXE)
 
+endif

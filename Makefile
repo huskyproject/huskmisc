@@ -1,8 +1,8 @@
-all: all-tools all-huskyui all-nmcopy
-clean: clean-tools clean-huskyui clean-nmcopy
-distclean: distclean-tools distclean-huskyui distclean-nmcopy
-install: install-tools install-huskyui install-nmcopy
-uninstall: uninstall-tools uninstall-huskyui uninstall-nmcopy
+all: all-tools all-huskyui all-nmcopy all-hflist
+clean: clean-tools clean-huskyui clean-nmcopy clean-hflist
+distclean: distclean-tools distclean-huskyui distclean-nmcopy distclean-hflist
+install: install-tools install-huskyui install-nmcopy install-hflist
+uninstall: uninstall-tools uninstall-huskyui uninstall-nmcopy uninstall-hflist
 
 all-tools:
 	$(MAKE) -C tools all
@@ -50,4 +50,19 @@ install-nmcopy:
 
 uninstall-nmcopy:
 	$(MAKE) -C nmcopy uninstall
+
+all-hflist:
+	$(MAKE) -C hflist all
+
+clean-hflist:
+	$(MAKE) -C hflist clean
+
+distclean-hflist:
+	$(MAKE) -C hflist distclean
+
+install-hflist:
+	$(MAKE) -C hflist install
+
+uninstall-hflist:
+	$(MAKE) -C hflist uninstall
 

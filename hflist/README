@@ -11,18 +11,18 @@ where format is a printf-like format string without leading % and without
 conversion specifier (template variables are always strings).
 
 variable name	scope		description
-filename	direntry	name of current file
-filedesc	direntry	description of current file
-filesize	direntry	size of current file
-fileexist	direntry	does the file really exist? "yes"/"no"
-fileyear	direntry        modification time of file: year
-filemonth	direntry        modification time of file: month
-fileday		direntry        modification time of file: day
-areaname	area*, dir*	name of current area
-areadesc	area*, dir*	description of current area
-areapath	area*, dir*	path to current area
-areanumfiles	areaftr		total number of files in area
-areatotalsize	areaftr		total size of all files in area
-globalnumfiles	globftr		total number of files in all areas
-globaltotalsize	globftr		total size of all files in all areas
+filename	direntry			name of current file
+filedesc	direntry			description of current file
+filesize	direntry			size of current file
+fileexist	direntry			does the file really exist? "yes"/"no"
+fileyear	direntry        		modification time of file: year
+filemonth	direntry        		modification time of file: month
+fileday		direntry        		modification time of file: day
+areaname	area*, dir*, dirListEntry	name of current area
+areadesc	area*, dir*, dirListEntry	description of current area
+areapath	area*, dir*, dirListEntry	path to current area
+areanumfiles	areaftr, dirListEntry		total number of files in area
+areatotalsize	areaftr, dirListEntry		total size of all files in area
+globalnumfiles	globftr, dirListFtr		total number of files in all areas
+globaltotalsize	globftr, dirListFtr		total size of all files in all areas
 

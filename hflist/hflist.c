@@ -30,24 +30,30 @@ typedef struct fileInfo
   char *desc;
 } s_fileInfo;
 
-typedef enum tplType { ttDir, ttGlobal } e_tplType;
+typedef enum tplType { ttDir, ttGlobal, ttDirList } e_tplType;
 
 typedef struct tplDef
 {
   e_tplType type;
-  char *dirHdrFile;   // filename of dir header template
-  char *dirEntryFile; //             dir entry
-  char *dirFtrFile;   //             dir footer
-  char *globHdrFile;  //             global header (ttGlobal only)
-  char *globFtrFile;  //             global footer (ttGlobal only)
-  char *dstFileName;  // name of file to be written
+  char *dirHdrFile;       // filename of dir header template (ttDir and ttGlobal)
+  char *dirEntryFile;     //             dir entry (ttDir and ttGlobal)
+  char *dirFtrFile;       //             dir footer (ttDir and ttGlobal)
+  char *globHdrFile;      //             global header (ttGlobal only)
+  char *globFtrFile;      //             global footer (ttGlobal only)
+  char *dirListHdrFile;   //             dirList header (ttDirList only)
+  char *dirListEntryFile; //             dirList entry (ttDirList only)
+  char *dirListFtrFile;   //             dirList footer (ttDirList only)
+  char *dstFileName;      // name of file to be written
 
-  FILE *dstFile;      // file handle (for internal use only)
-  char *dirHdrCont;      // contents of template files (for internal use only)
+  FILE *dstFile;          // file handle (for internal use only)
+  char *dirHdrCont;       // contents of template files (for internal use only)
   char *dirEntryCont;
   char *dirFtrCont;
   char *globHdrCont;
   char *globFtrCont;
+  char *dirListHdrCont;
+  char *dirListEntryCont;
+  char *dirListFtrCont;
 } s_tplDef;
 
 
@@ -232,9 +238,12 @@ void processFile(s_fileInfo *file, s_dirStats *stats)
 
   for (i = 0; i < numTpls; i++)
   {
-    line = processTemplate(tpls[i].dirEntryCont);
-    if (*line) fwrite(line, strlen(line), 1, tpls[i].dstFile);
-    nfree(line);
+    if ((tpls[i].type == ttGlobal) || (tpls[i].type == ttDir))
+    {
+      line = processTemplate(tpls[i].dirEntryCont);
+      if (*line) fwrite(line, strlen(line), 1, tpls[i].dstFile);
+      nfree(line);
+    }
   }
 
   tplFreeVar(cVarFileDay);
@@ -291,11 +300,14 @@ void processDir(char *dir, s_dirStats *globalStats)
   // process header templates
   for (i = 0; i < numTpls; i++)
   {
-    if (tpls[i].dstFile)
+    if ((tpls[i].type == ttDir) || (tpls[i].type == ttGlobal))
     {
-      line = processTemplate(tpls[i].dirHdrCont);
-      fwrite(line, strlen(line), 1, tpls[i].dstFile);
-      nfree(line);
+      if (tpls[i].dstFile)
+      {
+	line = processTemplate(tpls[i].dirHdrCont);
+	fwrite(line, strlen(line), 1, tpls[i].dstFile);
+	nfree(line);
+      }
     }
   }
 
@@ -323,14 +335,29 @@ void processDir(char *dir, s_dirStats *globalStats)
   tplSetVar(cVarAreaTotalsize, line);
   line = NULL;
 
-  // process footer templates
+  // process global/dir dirFtr / dirList dirListEntry templates
   for (i = 0; i < numTpls; i++)
   {
-    if (tpls[i].dstFile)
+    switch (tpls[i].type)
     {
-      line = processTemplate(tpls[i].dirFtrCont);
-      fwrite(line, strlen(line), 1, tpls[i].dstFile);
-      nfree(line);
+    case ttGlobal:
+    case ttDir:
+      if (tpls[i].dstFile)
+      {
+	line = processTemplate(tpls[i].dirFtrCont);
+	fwrite(line, strlen(line), 1, tpls[i].dstFile);
+	nfree(line);
+      }
+      break;
+
+    case ttDirList:
+      if (tpls[i].dstFile)
+      {
+	line = processTemplate(tpls[i].dirListEntryCont);
+	fwrite(line, strlen(line), 1, tpls[i].dstFile);
+	nfree(line);
+      }
+      break;
     }
   }
 
@@ -387,7 +414,12 @@ char *readFile(char *name)
   struct stat st;
 
   f = fopen(name, "r");
-  if (!f) return NULL;
+  if (!f)
+  {
+    printf("Could not open file '%s' for reading!\n", name);
+    return NULL;
+  }
+
   stat(name, &st);
   res = malloc(st.st_size + 1);
   fread(res, st.st_size, 1, f);
@@ -405,15 +437,29 @@ void getTplDefs(s_fidoconfig *fc)
   tpls = calloc(fc->filelistCount, sizeof(s_tplDef));
   for (i = 0; i < fc->filelistCount; i++)
   {
-    if (fc->filelists[i].flType == flDir)
+    switch (fc->filelists[i].flType)
+    {
+    case flDir:
       tpls[i].type = ttDir;
-    else tpls[i].type = ttGlobal;
+      break;
+
+    case flGlobal:
+      tpls[i].type = ttGlobal;
+      break;
+
+    case flDirList:
+      tpls[i].type = ttDirList;
+      break;
+    }
     tpls[i].dstFileName = fc->filelists[i].destFile;
     tpls[i].dirHdrFile = fc->filelists[i].dirHdrTpl;
     tpls[i].dirEntryFile = fc->filelists[i].dirEntryTpl;
     tpls[i].dirFtrFile = fc->filelists[i].dirFtrTpl;
     tpls[i].globHdrFile = fc->filelists[i].globHdrTpl;
     tpls[i].globFtrFile = fc->filelists[i].globFtrTpl;
+    tpls[i].dirListHdrFile = fc->filelists[i].dirListHdrTpl;
+    tpls[i].dirListEntryFile = fc->filelists[i].dirListEntryTpl;
+    tpls[i].dirListFtrFile = fc->filelists[i].dirListFtrTpl;
   }
 }
 
@@ -428,6 +474,9 @@ void readTpls()
     if (tpls[i].dirFtrFile) tpls[i].dirFtrCont = readFile(tpls[i].dirFtrFile);
     if (tpls[i].globHdrFile) tpls[i].globHdrCont = readFile(tpls[i].globHdrFile);
     if (tpls[i].globFtrFile) tpls[i].globFtrCont = readFile(tpls[i].globFtrFile);
+    if (tpls[i].dirListHdrFile) tpls[i].dirListHdrCont = readFile(tpls[i].dirListHdrFile);
+    if (tpls[i].dirListEntryFile) tpls[i].dirListEntryCont = readFile(tpls[i].dirListEntryFile);
+    if (tpls[i].dirListFtrFile) tpls[i].dirListFtrCont = readFile(tpls[i].dirListFtrFile);
   }
 }
 
@@ -442,6 +491,9 @@ void disposeTpls()
     nfree(tpls[i].dirFtrCont);
     nfree(tpls[i].globHdrCont);
     nfree(tpls[i].globFtrCont);
+    nfree(tpls[i].dirListHdrCont);
+    nfree(tpls[i].dirListEntryCont);
+    nfree(tpls[i].dirListFtrCont);
   }
 
   free(tpls);
@@ -477,7 +529,7 @@ int main(int argc, char *argv[])
     // open filelist destinations if necessary
     for (i = 0; i < numTpls; i++)
     {
-      if (tpls[i].type == ttGlobal)
+      if ((tpls[i].type == ttGlobal) || (tpls[i].type == ttDirList))
       {
 	tpls[i].dstFile = fopen(tpls[i].dstFileName, "w");
 	if (!tpls[i].dstFile)
@@ -490,10 +542,13 @@ int main(int argc, char *argv[])
     // process header templates
     for (i = 0; i < numTpls; i++)
     {
-      // only global filelists are already open
+      // only global and dirlist filelists are already open
       if (tpls[i].dstFile)
       {
-	line = processTemplate(tpls[i].globHdrCont);
+        if (tpls[i].type == ttGlobal)
+	  line = processTemplate(tpls[i].globHdrCont);
+        else
+	  line = processTemplate(tpls[i].dirListHdrCont);
 	fwrite(line, strlen(line), 1, tpls[i].dstFile);
 	nfree(line);
       }
@@ -524,10 +579,13 @@ int main(int argc, char *argv[])
     // process footer templates
     for (i = 0; i < numTpls; i++)
     {
-      // only global filelists are still open
+      // only global and dirList filelists are still open
       if (tpls[i].dstFile)
       {
-	line = processTemplate(tpls[i].globFtrCont);
+        if (tpls[i].type == ttGlobal)
+	  line = processTemplate(tpls[i].globFtrCont);
+        else
+	  line = processTemplate(tpls[i].dirListFtrCont);
 	fwrite(line, strlen(line), 1, tpls[i].dstFile);
 	nfree(line);
       }

@@ -18,7 +18,7 @@ char *tplVarNames[cNumVar] =
   "fileday",
   "filedesc",
   "fileexist",
-  "arename",
+  "areaname",
   "areadesc",
   "areapath",
   "areanumfiles",

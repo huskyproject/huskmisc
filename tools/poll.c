@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <smapi/progprot.h>
 #include <fidoconf/fidoconf.h>
 #include <fidoconf/common.h>
 

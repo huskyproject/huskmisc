@@ -406,7 +406,7 @@ void processArea(char *areaName, char *areaDesc, char *areaPath, s_dirStats *glo
 {
   tplSetVar(cVarAreaName, areaName);
   tplSetVar(cVarAreaDesc, areaDesc);
-  tplSetVar(cVarAreaDesc, areaPath);
+  tplSetVar(cVarAreaPath, areaPath);
 
   processDir(areaPath, globalStats);
 

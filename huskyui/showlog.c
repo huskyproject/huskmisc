@@ -147,8 +147,8 @@ void logShowHelp()
 {
   WINDOW *helpWinBoxed, *helpWin;
 
-  helpWinBoxed = newwin(LINES - 1, COLS - 1, 0, 0);
-  helpWin = newwin(LINES - 3, COLS - 5, 1, 2);
+  helpWinBoxed = newwin(LINES, COLS, 0, 0);
+  helpWin = newwin(LINES - 2, COLS - 4, 1, 2);
 
   wborder(helpWinBoxed, ACS_BLOCK, ACS_BLOCK, ACS_BLOCK, ACS_BLOCK,
 	  ACS_BLOCK, ACS_BLOCK, ACS_BLOCK, ACS_BLOCK);

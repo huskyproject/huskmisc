@@ -21,9 +21,9 @@ CDEFS=-D$(OSTYPE) $(ADDCDEFS)
 .c$(OBJ):
 	$(CC) $(CFLAGS) $(CDEFS) -c $<
 
-huskyui$(EXE): huskyui$(OBJ) sock$(OBJ) showlog$(OBJ) showoutb$(OBJ)\
+huskyui$(EXE): huskyui$(OBJ) showlog$(OBJ) showoutb$(OBJ)\
   menu$(OBJ) cfg$(OBJ) screen$(OBJ)
-	$(CC) $(LFLAGS) -o huskyui$(EXE) huskyui$(OBJ) sock$(OBJ) \
+	$(CC) $(LFLAGS) -o huskyui$(EXE) huskyui$(OBJ) \
 	  showlog$(OBJ) showoutb$(OBJ) menu$(OBJ) cfg$(OBJ) \
 	  screen$(OBJ) $(LIBS)
 

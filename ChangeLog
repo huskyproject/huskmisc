@@ -1,3 +1,8 @@
+2003-01-15 Wednesday 06:00  stas_degteff
+
+	* hflist/: snprintf.c (1.2), snprintf.h (1.2): Update defines
+	(changed in smapi/compiler.h)
+
 2002-11-27 Wednesday 00:07  nssoft
 
 	* huskyui/cfg.h (1.2), nmcopy/nmcopy.c (1.2), tools/general.c

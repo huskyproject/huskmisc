@@ -52,17 +52,17 @@ uninstall-nmcopy:
 	$(MAKE) -C nmcopy uninstall
 
 all-hflist:
-	$(MAKE) -C hflist all
+#	$(MAKE) -C hflist all
 
 clean-hflist:
-	$(MAKE) -C hflist clean
+#	$(MAKE) -C hflist clean
 
 distclean-hflist:
-	$(MAKE) -C hflist distclean
+#	$(MAKE) -C hflist distclean
 
 install-hflist:
-	$(MAKE) -C hflist install
+#	$(MAKE) -C hflist install
 
 uninstall-hflist:
-	$(MAKE) -C hflist uninstall
+#	$(MAKE) -C hflist uninstall
 

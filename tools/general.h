@@ -8,9 +8,14 @@
 #define DirSepS "\\"
 #endif
 
-char *FLOName(s_fidoconfig *config, s_addr Addr);
-char *strlower(char *s);
-s_addr Str2Addr(char *s);
-char *Addr2Str(s_addr a);
-int CompAddr(s_addr a1, s_addr a2);
 
+/* FLOName - generate name of FLO for a given address
+   params: outbound     path of outbound
+           Addr         address to generate FLO name for
+   result: filename of FLO (memory is allocated automatically) */
+char *FLOName(s_fidoconfig *config, s_addr Addr);
+
+/* Str2Addr - parse address-string into binary address
+   params: s            string to parse
+   result: binary address */
+s_addr Str2Addr(char *s);

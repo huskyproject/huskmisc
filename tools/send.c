@@ -1,10 +1,13 @@
 /* poll.c - create a flowfile for a node/point to call him */
 
 #include <errno.h>
-#include <fidoconf/fidoconf.h>
 #include <string.h>
 #include <stdlib.h>
+
+#include <fidoconf/fidoconf.h>
 #include "general.h"
+
+#define ADDRESS argv[1]
 
 int main(int argc, char *argv[])
 {

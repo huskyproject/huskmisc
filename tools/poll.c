@@ -6,10 +6,12 @@
 #include <unistd.h>
 
 #include <smapi/progprot.h>
-#include <smapi/compiler.h>
 #include <fidoconf/fidoconf.h>
+#include <fidoconf/common.h>
 
 #include "general.h"
+
+#define ADDRESS argv[1]
 
 int main(int argc, char *argv[])
 {
@@ -28,13 +30,16 @@ int main(int argc, char *argv[])
 
   if (config != NULL)
   {
-    char *flo = FLOName(config, Str2Addr(argv[1]));
-    unsigned int floLen = strlen(flo);
+    char *flo;
+    unsigned int floLen;
     FILE *f;
     int deldlc = 0;
     int i;
 
-    // default flavour
+    flo = FLOName(config, Str2Addr(ADDRESS));
+    floLen = strlen(flo);
+
+    /* default flavour */
     flo[floLen - 3] = 'c';
 
     if (argc > 2)
@@ -54,29 +59,32 @@ int main(int argc, char *argv[])
       }
     }
 
-    // create FlowFile
+    /* create FlowFile */
     f = fopen(flo, "a");
     if (f == NULL)
     {
       printf("Could not open '%s' (error #%d: %s)!\n", flo, errno,
 	     strerror(errno));
     }
-    else fclose(f);
+    else
+    { printf("Poll to %s created.\n", ADDRESS);
+      fclose(f);
+    }
 
     if (deldlc)
     {
-      // delete dial-counters
-      flo[floLen - 3] = '$'; // Binkley-style
+      /* delete dial-counters */
+      flo[floLen - 3] = '$'; /* Binkley-style */
       flo[floLen - 2] = '$';
       flo[floLen - 1] = '0';
       if (fexist(flo)) unlink(flo);
 
-      flo[floLen - 3] = 's'; // ifcico-style
+      flo[floLen - 3] = 's'; /* ifcico-style */
       flo[floLen - 2] = 't';
       flo[floLen - 1] = 's';
       if (fexist(flo)) unlink(flo);
 
-      flo[floLen - 3] = 'h'; // BinkD-style
+      flo[floLen - 3] = 'h'; /* BinkD-style */
       flo[floLen - 2] = 'l';
       flo[floLen - 1] = 'd';
       if (fexist(flo)) unlink(flo);

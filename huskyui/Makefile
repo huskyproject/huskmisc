@@ -28,15 +28,15 @@ huskyui$(EXE): huskyui$(OBJ) showlog$(OBJ) showoutb$(OBJ)\
 	  screen$(OBJ) $(LIBS)
 
 clean:
-	-$(RM) *~
-	-$(RM) *$(OBJ)
+	-$(RM) $(RMOPT) *~
+	-$(RM) $(RMOPT) *$(OBJ)
 
 distclean: clean
-	-$(RM) huskyui$(EXE)
+	-$(RM) $(RMOPT) huskyui$(EXE)
 
 install: huskyui$(EXE)
 	$(INSTALL) $(IBOPT) huskyui$(EXE) $(BINDIR)
 
 uninstall:
-	$(RM) $(BINDIR)$(DIRSEP)huskyui$(EXE)
+	$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)huskyui$(EXE)
 

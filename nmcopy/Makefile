@@ -26,15 +26,15 @@ nmcopy$(EXE): nmcopy$(OBJ)
 	$(CC) $(LFLAGS) -o nmcopy$(EXE) nmcopy$(OBJ) $(LIBS)
 
 clean:
-	-$(RM) *~
-	-$(RM) *$(OBJ)
+	-$(RM) $(RMOPT) *~
+	-$(RM) $(RMOPT) *$(OBJ)
 
 distclean: clean
-	-$(RM) nmcopy$(EXE)
+	-$(RM) $(RMOPT) nmcopy$(EXE)
 
 install:
 	$(INSTALL) $(IBOPT) nmcopy$(EXE) $(BINDIR)
 
 uninstall:
-	-$(RM) $(BINDIR)$(DIRSEP)nmcopy$(EXE)
+	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)nmcopy$(EXE)
 

@@ -35,24 +35,24 @@ tolower$(EXE): tolower$(OBJ)
 	$(CC) $(LFLAGS) -o tolower$(EXE) tolower$(OBJ) $(LIBS)
 
 clean:
-	-$(RM) *~
-	-$(RM) *$(OBJ)
+	-$(RM) $(RMOPT) *~
+	-$(RM) $(RMOPT) *$(OBJ)
 
 distclean: clean
-	-$(RM) poll$(EXE)
-	-$(RM) request$(EXE)
-	-$(RM) send$(EXE)
-	-$(RM) tolower$(EXE)
+	-$(RM) $(RMOPT) poll$(EXE)
+	-$(RM) $(RMOPT) request$(EXE)
+	-$(RM) $(RMOPT) send$(EXE)
+	-$(RM) $(RMOPT) tolower$(EXE)
 
 install:
-	$(INSTALL) $(IBOPT) poll$(EXE) $(BINDIR)
-	$(INSTALL) $(IBOPT) request$(EXE) $(BINDIR)
-	$(INSTALL) $(IBOPT) send$(EXE) $(BINDIR)
-	$(INSTALL) $(IBOPT) tolower$(EXE) $(BINDIR)
+	$(INSTALL) $(RMOPT) $(IBOPT) poll$(EXE) $(BINDIR)
+	$(INSTALL) $(RMOPT) $(IBOPT) request$(EXE) $(BINDIR)
+	$(INSTALL) $(RMOPT) $(IBOPT) send$(EXE) $(BINDIR)
+	$(INSTALL) $(RMOPT) $(IBOPT) tolower$(EXE) $(BINDIR)
 
 uninstall:
-	-$(RM) $(BINDIR)$(DIRSEP)poll$(EXE) 
-	-$(RM) $(BINDIR)$(DIRSEP)request$(EXE)
-	-$(RM) $(BINDIR)$(DIRSEP)send$(EXE)
-	-$(RM) $(BINDIR)$(DIRSEP)tolower$(EXE)
+	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)poll$(EXE) 
+	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)request$(EXE)
+	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)send$(EXE)
+	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)tolower$(EXE)
 

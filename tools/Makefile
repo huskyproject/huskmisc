@@ -45,10 +45,10 @@ distclean: clean
 	-$(RM) $(RMOPT) tolower$(EXE)
 
 install:
-	$(INSTALL) $(RMOPT) $(IBOPT) poll$(EXE) $(BINDIR)
-	$(INSTALL) $(RMOPT) $(IBOPT) request$(EXE) $(BINDIR)
-	$(INSTALL) $(RMOPT) $(IBOPT) send$(EXE) $(BINDIR)
-	$(INSTALL) $(RMOPT) $(IBOPT) tolower$(EXE) $(BINDIR)
+	$(INSTALL) $(IBOPT) poll$(EXE) $(BINDIR)
+	$(INSTALL) $(IBOPT) request$(EXE) $(BINDIR)
+	$(INSTALL) $(IBOPT) send$(EXE) $(BINDIR)
+	$(INSTALL) $(IBOPT) tolower$(EXE) $(BINDIR)
 
 uninstall:
 	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)poll$(EXE) 

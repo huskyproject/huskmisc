@@ -13,6 +13,7 @@ CDEFS	= -D__NT__
 
 EXE	=
 OBJ	= .o
+LIB	= .a
 CC	= gcc
 RM	= rm
 RMOPT	=
@@ -27,6 +28,7 @@ OPTLFLAGS	= -s
 
 CFLAGS	= -I../../ -c -O3 -pedantic -Wall -mno-cygwin
 LFLAGS	= -L../../smapi -L../../fidoconf -mno-cygwin
+#LFLAGS	= -mno-cygwin
 
 ifeq ($(DEBUG), 1)
   CFLAGS	+= $(DEBCFLAGS)
@@ -37,13 +39,14 @@ else
 endif
 
 
-LIBS	= -lfidoconfig$(SYS) -lsmapi$(SYS) 
+LIBS	= -lfidoconfig$(SYS) -lsmapi$(SYS)
+#LIBS	= ../../fidoconf/libfidoconfig$(SYS)$(LIB) ../../smapi/libsmapi$(SYS)$(LIB)
 
 
 all: poll$(EXE) request$(EXE) send$(EXE) tolower$(EXE)
 
 .c$(OBJ):
-	$(CC) $(CFLAGS) $(CDEFS) -c $<
+	$(CC) $(CFLAGS) $(CDEFS) $<
 
 poll$(EXE): poll$(OBJ) general$(OBJ)
 	$(CC) $(LFLAGS) -o poll$(EXE) poll$(OBJ) general$(OBJ) $(LIBS)

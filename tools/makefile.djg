@@ -41,7 +41,7 @@ LIBS	= -lfidoconfig$(SYS) -lsmapi$(SYS)
 all: poll$(EXE) request$(EXE) send$(EXE) tolower$(EXE)
 
 .c$(OBJ):
-	$(CC) $(CFLAGS) $(CDEFS) -c $<
+	$(CC) $(CFLAGS) $(CDEFS) $<
 
 poll$(EXE): poll$(OBJ) general$(OBJ)
 	$(CC) $(LFLAGS) -o poll$(EXE) poll$(OBJ) general$(OBJ) $(LIBS)

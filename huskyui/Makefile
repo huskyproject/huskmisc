@@ -1,6 +1,6 @@
 include ../../huskymak.cfg
 
-all: huskyui$(EXE)
+all: huskyui$(_EXE)
 
 ifeq ($(DEBUG), 1)
   CFLAGS=-I$(INCDIR) $(DEBCFLAGS) $(WARNFLAGS)
@@ -11,32 +11,32 @@ else
 endif
 
 ifeq ($(SHORTNAME), 1)
-  LIBS=-L$(LIBDIR) -lncurses -lfidoconf -lsmapi
+  LIBS=-L$(LIBDIR) -lncurses -lfidoconf -lsmapi -lhusky
 else
-  LIBS=-L$(LIBDIR) -lncurses -lfidoconfig -lsmapi
+  LIBS=-L$(LIBDIR) -lncurses -lfidoconfig -lsmapi -lhusky
 endif
 
 CDEFS=-D$(OSTYPE) $(ADDCDEFS)
 
-.c$(OBJ):
+.c$(_OBJ):
 	$(CC) $(CFLAGS) $(CDEFS) -c $<
 
-huskyui$(EXE): huskyui$(OBJ) showlog$(OBJ) showoutb$(OBJ)\
-  menu$(OBJ) cfg$(OBJ) screen$(OBJ)
-	$(CC) $(LFLAGS) -o huskyui$(EXE) huskyui$(OBJ) \
-	  showlog$(OBJ) showoutb$(OBJ) menu$(OBJ) cfg$(OBJ) \
-	  screen$(OBJ) $(LIBS)
+huskyui$(_EXE): huskyui$(_OBJ) showlog$(_OBJ) showoutb$(_OBJ)\
+  menu$(_OBJ) cfg$(_OBJ) screen$(_OBJ)
+	$(CC) $(LFLAGS) -o huskyui$(_EXE) huskyui$(_OBJ) \
+	  showlog$(_OBJ) showoutb$(_OBJ) menu$(_OBJ) cfg$(_OBJ) \
+	  screen$(_OBJ) $(LIBS)
 
 clean:
 	-$(RM) $(RMOPT) *~
-	-$(RM) $(RMOPT) *$(OBJ)
+	-$(RM) $(RMOPT) *$(_OBJ)
 
 distclean: clean
-	-$(RM) $(RMOPT) huskyui$(EXE)
+	-$(RM) $(RMOPT) huskyui$(_EXE)
 
-install: huskyui$(EXE)
-	$(INSTALL) $(IBOPT) huskyui$(EXE) $(BINDIR)
+install: huskyui$(_EXE)
+	$(INSTALL) $(IBOPT) huskyui$(_EXE) $(BINDIR)
 
 uninstall:
-	$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)huskyui$(EXE)
+	$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)huskyui$(_EXE)
 

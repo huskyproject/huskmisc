@@ -5,7 +5,7 @@
 
 include ../../huskymak.cfg
 
-all: poll$(EXE) request$(EXE) send$(EXE) tolower$(EXE)
+all: poll$(_EXE) request$(_EXE) send$(_EXE) tolower$(_EXE)
 
 ifeq ($(DEBUG), 1)
   CFLAGS=-I$(INCDIR) $(DEBCFLAGS) $(WARNFLAGS)
@@ -16,52 +16,52 @@ else
 endif
 
 ifeq ($(SHORTNAME), 1)
-  LIBS=-L$(LIBDIR) -lfidoconf -lsmapi
+  LIBS=-L$(LIBDIR) -lfidoconf -lsmapi -lhusky
 else
-  LIBS=-L$(LIBDIR) -lfidoconfig -lsmapi
+  LIBS=-L$(LIBDIR) -lfidoconfig -lsmapi -lhusky
 endif
 
 CDEFS=-D$(OSTYPE) $(ADDCDEFS)
 
 
-.c$(OBJ):
+.c$(_OBJ):
 	$(CC) $(CFLAGS) $(CDEFS) -c $<
 
-poll$(EXE): poll$(OBJ) general$(OBJ)
-	$(CC) $(LFLAGS) -o poll$(EXE) poll$(OBJ) general$(OBJ) $(LIBS)
+poll$(_EXE): poll$(_OBJ) general$(_OBJ)
+	$(CC) $(LFLAGS) -o poll$(_EXE) poll$(_OBJ) general$(_OBJ) $(LIBS)
 
-request$(EXE): request$(OBJ) general$(OBJ)
-	$(CC) $(LFLAGS) -o request$(EXE) request$(OBJ) general$(OBJ) $(LIBS)
+request$(_EXE): request$(_OBJ) general$(_OBJ)
+	$(CC) $(LFLAGS) -o request$(_EXE) request$(_OBJ) general$(_OBJ) $(LIBS)
 
-send$(EXE): send$(OBJ) general$(OBJ)
-	$(CC) $(LFLAGS) -o send$(EXE) send$(OBJ) general$(OBJ) $(LIBS)
+send$(_EXE): send$(_OBJ) general$(_OBJ)
+	$(CC) $(LFLAGS) -o send$(_EXE) send$(_OBJ) general$(_OBJ) $(LIBS)
 
-tolower$(EXE): tolower$(OBJ)
-	$(CC) $(LFLAGS) -o tolower$(EXE) tolower$(OBJ) $(LIBS)
+tolower$(_EXE): tolower$(_OBJ)
+	$(CC) $(LFLAGS) -o tolower$(_EXE) tolower$(_OBJ) $(LIBS)
 
 clean:
 	-$(RM) $(RMOPT) *.bak
 	-$(RM) $(RMOPT) *.b
-	-$(RM) $(RMOPT) *$(OBJ)
+	-$(RM) $(RMOPT) *$(_OBJ)
 
 distclean: clean
-	-$(RM) $(RMOPT) poll$(EXE)
-	-$(RM) $(RMOPT) request$(EXE)
-	-$(RM) $(RMOPT) send$(EXE)
-	-$(RM) $(RMOPT) tolower$(EXE)
+	-$(RM) $(RMOPT) poll$(_EXE)
+	-$(RM) $(RMOPT) request$(_EXE)
+	-$(RM) $(RMOPT) send$(_EXE)
+	-$(RM) $(RMOPT) tolower$(_EXE)
 
 ifdef INSTALL
 
 install:
-	$(INSTALL) $(IBOPT) poll$(EXE) $(BINDIR)
-	$(INSTALL) $(IBOPT) request$(EXE) $(BINDIR)
-	$(INSTALL) $(IBOPT) send$(EXE) $(BINDIR)
-	$(INSTALL) $(IBOPT) tolower$(EXE) $(BINDIR)
+	$(INSTALL) $(IBOPT) poll$(_EXE) $(BINDIR)
+	$(INSTALL) $(IBOPT) request$(_EXE) $(BINDIR)
+	$(INSTALL) $(IBOPT) send$(_EXE) $(BINDIR)
+	$(INSTALL) $(IBOPT) tolower$(_EXE) $(BINDIR)
 
 uninstall:
-	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)poll$(EXE) 
-	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)request$(EXE)
-	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)send$(EXE)
-	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)tolower$(EXE)
+	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)poll$(_EXE) 
+	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)request$(_EXE)
+	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)send$(_EXE)
+	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)tolower$(_EXE)
 
 endif

@@ -1,6 +1,6 @@
 include ../../huskymak.cfg
 
-all: hflist$(EXE)
+all: hflist$(_EXE)
 
 ifeq ($(DEBUG), 1)
   CFLAGS=-I$(INCDIR) $(DEBCFLAGS) $(WARNFLAGS)
@@ -11,31 +11,31 @@ else
 endif
 
 ifeq ($(SHORTNAME), 1)
-  LIBS=-L$(LIBDIR) -lfidoconf -lsmapi
+  LIBS=-L$(LIBDIR) -lfidoconf -lsmapi -lhusky
 else
-  LIBS=-L$(LIBDIR) -lfidoconfig -lsmapi
+  LIBS=-L$(LIBDIR) -lfidoconfig -lsmapi -lhusky
 endif
 
 CDEFS=-D$(OSTYPE) $(ADDCDEFS)
 
-OBJS=hflist$(OBJ) snprintf$(OBJ) template$(OBJ)
+OBJS=hflist$(_OBJ) snprintf$(_OBJ) template$(_OBJ)
 
-.c$(OBJ):
+.c$(_OBJ):
 	$(CC) $(CFLAGS) $(CDEFS) -c $<
 
-hflist$(EXE): $(OBJS)
-	$(CC) $(LFLAGS) -o hflist$(EXE) $(OBJS) $(LIBS)
+hflist$(_EXE): $(OBJS)
+	$(CC) $(LFLAGS) -o hflist$(_EXE) $(OBJS) $(LIBS)
 
 clean:
-	-$(RM) $(RMOPT) *$(OBJ)
+	-$(RM) $(RMOPT) *$(_OBJ)
 	-$(RM) $(RMOPT) *~
 
 distclean: clean
-	-$(RM) $(RMOPT) hflist$(EXE)
+	-$(RM) $(RMOPT) hflist$(_EXE)
 
-install: hflist$(EXE)
-	$(INSTALL) $(IBOPT) hflist$(EXE) $(BINDIR)
+install: hflist$(_EXE)
+	$(INSTALL) $(IBOPT) hflist$(_EXE) $(BINDIR)
 
 uninstall:
-	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)hflist$(EXE)
+	-$(RM) $(RMOPT) $(BINDIR)$(DIRSEP)hflist$(_EXE)
 

@@ -2,22 +2,22 @@
  * Copyright (c) 1995-2000 Kungliga Tekniska Högskolan
  * (Royal Institute of Technology, Stockholm, Sweden).
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright
  *    notice, this list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of the Institute nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE INSTITUTE AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -69,7 +69,7 @@ struct state {
 #define min(a,b) ((a < b) ? (a) : (b))
 #endif
 
-#ifndef HAS_VSNPRINTF
+#ifndef HAS_vsnprintf
 static int
 sn_reserve (struct state *state, size_t n)
 {
@@ -207,7 +207,7 @@ append_number(struct state *state,
       state->s[-i-1] = state->s[-len+i];
       state->s[-len+i] = c;
     }
-    
+
   return 0;
 }
 
@@ -251,13 +251,13 @@ append_char(struct state *state,
   while(!(flags & minus_flag) && --width > 0)
     if((*state->append_char) (state, ' '))
       return 1;
-    
+
   if((*state->append_char) (state, arg))
     return 1;
   while((flags & minus_flag) && --width > 0)
     if((*state->append_char) (state, ' '))
       return 1;
-    
+
   return 0;
 }
 
@@ -306,7 +306,7 @@ xyzprintf (struct state *state, const char *char_format, va_list ap)
 	else
 	  break;
       }
-      
+
       if((flags & space_flag) && (flags & plus_flag))
 	flags ^= space_flag;
 
@@ -358,7 +358,7 @@ xyzprintf (struct state *state, const char *char_format, va_list ap)
 	if (append_string(state,
 			  va_arg(ap, unsigned char*),
 			  width,
-			  prec, 
+			  prec,
 			  flags))
 	  return -1;
 	break;
@@ -454,7 +454,7 @@ xyzprintf (struct state *state, const char *char_format, va_list ap)
   return 0;
 }
 
-#ifndef HAS_SNPRINTF
+#ifndef HAS_snprintf
 int
 snprintf (char *str, size_t sz, const char *format, ...)
 {
@@ -469,7 +469,7 @@ snprintf (char *str, size_t sz, const char *format, ...)
 }
 #endif
 
-#ifndef HAS_ASPRINTF
+#ifndef HAS_asprintf
 int
 asprintf (char **ret, const char *format, ...)
 {
@@ -499,7 +499,7 @@ asnprintf (char **ret, size_t max_sz, const char *format, ...)
 }
 #endif
 
-#ifndef HAS_VASPRINTF
+#ifndef HAS_vasprintf
 int
 vasprintf (char **ret, const char *format, va_list args)
 {
@@ -508,7 +508,7 @@ vasprintf (char **ret, const char *format, va_list args)
 #endif
 
 
-#ifndef HAS_VASNPRINTF
+#ifndef HAS_vasnprintf
 int
 vasnprintf (char **ret, size_t max_sz, const char *format, va_list args)
 {
@@ -550,7 +550,7 @@ vasnprintf (char **ret, size_t max_sz, const char *format, va_list args)
 }
 #endif
 
-#ifndef HAS_VSNPRINTF
+#ifndef HAS_vsnprintf
 int
 vsnprintf (char *str, size_t sz, const char *format, va_list args)
 {

@@ -1,6 +1,6 @@
 # $Id$
 #
-# Legacy makefile for build miscellaneous tools HUSKY using Cygwin
+# Legacy makefile for build miscellaneous tools HUSKY using Cygwin/MINGW32
 
 # Set to 1 for debugging
 DEBUG	= 0
@@ -14,12 +14,10 @@ CDEFS	= -D__NT__
 EXE	= .exe
 OBJ	= .o
 LIB	= .a
+SHLIB	= .dll
 CC	= gcc
 RM	= rm
 RMOPT	=
-INSTALL	=
-IBOPT	= -m 555
-BINDIR	= /usr/local/bin/
 
 DEBCFLAGS	= -g
 OPTCFLAGS	= -s
@@ -28,7 +26,6 @@ OPTLFLAGS	= -s
 
 CFLAGS	= -I../../ -c -O3 -pedantic -Wall -mno-cygwin
 LFLAGS	= -L../../smapi -L../../fidoconf -mno-cygwin
-#LFLAGS	= -mno-cygwin
 
 ifeq ($(DEBUG), 1)
   CFLAGS	+= $(DEBCFLAGS)
@@ -38,12 +35,19 @@ else
   LFLAGS	+= $(OPTLFLAGS)
 endif
 
-
-LIBS	= -lfidoconfig$(SYS) -lsmapi$(SYS)
-#LIBS	= ../../fidoconf/libfidoconfig$(SYS)$(LIB) ../../smapi/libsmapi$(SYS)$(LIB)
+ifeq ($(DLL), 1)
+  CFLAGS	+= -shared
+  LFLAGS	+= -shared
+  LIBS		=  ../../fidoconf/fidoconf$(SHLIB) ../../smapi/smapi$(SHLIB)
+else
+  LIBS	= -lfidoconfig$(SYS) -lsmapi$(SYS)
+endif
 
 
 all: poll$(EXE) request$(EXE) send$(EXE) tolower$(EXE)
+ifneq ($(DLL), 1)
+	echo To build DLL version run 'make DLL=1'
+endif
 
 .c$(OBJ):
 	$(CC) $(CFLAGS) $(CDEFS) $<

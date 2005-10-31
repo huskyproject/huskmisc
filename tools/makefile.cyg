@@ -11,7 +11,7 @@ SYS	= cyg
 # Set this to our system type: UNIX, __NT__, __DOS__, __OS2__, ...
 CDEFS	= -D__NT__
 
-EXE	=
+EXE	= .exe
 OBJ	= .o
 LIB	= .a
 CC	= gcc

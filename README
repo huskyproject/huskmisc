@@ -1,0 +1,59 @@
+	HUSKY Miscellaneous Tools
+	=========================
+
+    The 'tools' subdirectory is contain four HUSKY tools: send, request, poll,
+tolower.
+
+
+	The POLL tool
+	=============
+
+    The tool 'poll' may be used to create a poll to any FTN system what is
+listed or not listed in your fidoconfig. This program should be called with
+following parameters:
+- 1st is address of system to poll,
+- 2nd (optional) string "deldlc",
+- 3rd (optional) is flavour of the poll.
+The "deldlc" string is used to delete mailer's hold flags and call counters
+(.$$o for Binkley, .sts for ifcico/t-mail/qico/binkd, .hld for binkd).
+Flavour may be:
+- "immediate",
+- "crash",
+- "normal",
+- "direct",
+- "hold".
+
+
+	The SEND tool
+	=============
+
+    The tool 'send' may be used to attach any file to any FTN system what is
+listed or not listed in your fidoconfig. This program should be called with
+following parameters:
+- 1st is address of system to poll,
+- 2nd (optional) is flavour name,
+- 3rd (optional) is pathname of the file.
+Flavour may be:
+- "immediate",
+- "crash",
+- "normal",
+- "direct",
+- "hold".
+
+
+	The REQUEST tool
+	================
+
+    The tool 'request' may be used to generate FREQ for any file from any FTN
+system what should be listed in your fidoconfig. This program should be called
+with following parameters:
+- 1st is address of system to FREQ,
+- 2nd is name of the file to request.
+
+
+	The TOLOWER tool
+	================
+
+    The tool 'tolower' may be used to rename a file to name contains the
+lowercase characters only. This is needed in some cases when link sends files
+with names in upper case or mixed case.

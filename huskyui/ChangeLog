@@ -1,5 +1,0 @@
------ cvs ci ------
-Wed Aug 30 18:16:55 UTC 2000
-sms:
-* fixed size of windows (did not fully use the available space)
-

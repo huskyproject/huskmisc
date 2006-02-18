@@ -1,0 +1,92 @@
+# $Id$
+#
+# Legacy makefile for build miscellaneous tools HUSKY using Cygwin/MINGW32
+
+# Set to 1 for debugging
+DEBUG	= 0
+
+# set SYS to your system ID: unx, sun, bsd, cyg, mgw, djg, ...
+SYS	= cyg
+
+# Set this to our system type: UNIX, __NT__, __DOS__, __OS2__, ...
+CDEFS	= -D__NT__
+
+EXE	= .exe
+OBJ	= .o
+LIB	= .a
+SHLIB	= .dll
+CC	= gcc
+RM	= rm
+RMOPT	=
+
+DEBCFLAGS	= -g
+OPTCFLAGS	= -s
+DEBLFLAGS	= -g
+OPTLFLAGS	= -s
+
+CFLAGS	= -I../../ -c -O3 -pedantic -Wall -mno-cygwin
+LFLAGS	= -L../../smapi -L../../fidoconf -mno-cygwin
+
+ifeq ($(DEBUG), 1)
+  CFLAGS	+= $(DEBCFLAGS)
+  LFLAGS	+= $(DEBLFLAGS)
+else
+  CFLAGS	+= $(OPTCFLAGS)
+  LFLAGS	+= $(OPTLFLAGS)
+endif
+
+ifeq ($(DLL), 1)
+  CFLAGS	+= -shared
+  LFLAGS	+= -shared
+  LIBS		=  ../../fidoconf/fidoconf$(SHLIB) ../../smapi/smapi$(SHLIB)
+else
+  LIBS	= -lfidoconfig$(SYS) -lsmapi$(SYS)
+endif
+
+
+all: poll$(EXE) request$(EXE) send$(EXE) tolower$(EXE)
+ifneq ($(DLL), 1)
+	echo To build DLL version run 'make DLL=1'
+endif
+
+.c$(OBJ):
+	$(CC) $(CFLAGS) $(CDEFS) $<
+
+poll$(EXE): poll$(OBJ) general$(OBJ)
+	$(CC) $(LFLAGS) -o poll$(EXE) poll$(OBJ) general$(OBJ) $(LIBS)
+
+request$(EXE): request$(OBJ) general$(OBJ)
+	$(CC) $(LFLAGS) -o request$(EXE) request$(OBJ) general$(OBJ) $(LIBS)
+
+send$(EXE): send$(OBJ) general$(OBJ)
+	$(CC) $(LFLAGS) -o send$(EXE) send$(OBJ) general$(OBJ) $(LIBS)
+
+tolower$(EXE): tolower$(OBJ)
+	$(CC) $(LFLAGS) -o tolower$(EXE) tolower$(OBJ) $(LIBS)
+
+clean:
+	-$(RM) $(RMOPT) *.bak
+	-$(RM) $(RMOPT) *.b
+	-$(RM) $(RMOPT) *$(OBJ)
+
+distclean: clean
+	-$(RM) $(RMOPT) poll$(EXE)
+	-$(RM) $(RMOPT) request$(EXE)
+	-$(RM) $(RMOPT) send$(EXE)
+	-$(RM) $(RMOPT) tolower$(EXE)
+
+ifdef INSTALL
+
+install:
+	$(INSTALL) $(IBOPT) poll$(EXE)    $(BINDIR)
+	$(INSTALL) $(IBOPT) request$(EXE) $(BINDIR)
+	$(INSTALL) $(IBOPT) send$(EXE)    $(BINDIR)
+	$(INSTALL) $(IBOPT) tolower$(EXE) $(BINDIR)
+
+uninstall:
+	-$(RM) $(RMOPT) $(BINDIR)poll$(EXE) 
+	-$(RM) $(RMOPT) $(BINDIR)request$(EXE)
+	-$(RM) $(RMOPT) $(BINDIR)send$(EXE)
+	-$(RM) $(RMOPT) $(BINDIR)tolower$(EXE)
+
+endif

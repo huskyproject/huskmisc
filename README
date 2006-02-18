@@ -1,7 +1,7 @@
 	HUSKY Miscellaneous Tools
 	=========================
 
-    The 'tools' subdirectory is contain four HUSKY tools: send, request, poll,
+    The 'tools' subdirectory is contain four HUSKY tools: poll, send, request,
 tolower.
 
 

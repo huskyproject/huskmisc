@@ -1,0 +1,16 @@
+Source: huskmisc
+Section: utils
+Priority: extra
+Maintainer: Pavel Andreew <sfpavel@users.sourceforge.net>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.1
+
+Package: huskmisc
+Architecture: i386
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: HUSKY tools
+ HUSKY tools includes: poll, send, request, tolower.
+ poll: for create a poll to any FTN system
+ send: for attach any file to any FTN system
+ request: for generate FREQ for any file from any FTN system
+ tolower: for rename a file to name contains the lowercase characters only.

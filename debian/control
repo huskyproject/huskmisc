@@ -7,9 +7,9 @@ Standards-Version: 3.6.1
 
 Package: huskmisc
 Architecture: i386
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}
 Description: HUSKY tools
- HUSKY tools includes: poll, send, request, tolower.
+ This is collection of the HUSKY tools.
  poll: for create a poll to any FTN system
  send: for attach any file to any FTN system
  request: for generate FREQ for any file from any FTN system

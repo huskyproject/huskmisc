@@ -3,10 +3,13 @@
  */
 
 #include <stdio.h>
-#include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+
+#ifdef HAS_UNISTD_H
+#include <unistd.h>
+#endif
 
 #include <fidoconf/common.h>
 

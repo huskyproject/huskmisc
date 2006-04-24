@@ -3,7 +3,10 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
+
+#ifdef HAS_UNISTD_H
 #include <unistd.h>
+#endif
 
 #include <smapi/progprot.h>
 #include <fidoconf/fidoconf.h>

@@ -28,7 +28,7 @@ OPTLFLAGS	= -s
 
 CFLAGS	= -I../../ -c -O3 -pedantic -Wall -mno-cygwin
 LFLAGS	= -L../../smapi -L../../fidoconf -mno-cygwin
-#LFLAGS	= -mno-cygwin
+LFLAGS	+= -mno-cygwin
 
 ifeq ($(DEBUG), 1)
   CFLAGS	+= $(DEBCFLAGS)
